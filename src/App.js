@@ -17,7 +17,6 @@ function App() {
       );
       const jsonData = await response.json();
       setData(jsonData);
-      console.log("jsonData", jsonData);
       setLoading(false);
     } catch (error) {
       setError(error.message);
@@ -31,19 +30,15 @@ function App() {
 
   function cleanList() {
     setLoading(true);
-    console.log("clean");
     setData(null);
     setLoading(false);
   }
   function fullList() {
-    console.log("full");
     setLoading(true);
     fetchData();
   }
   const handleSelectOption = async (event) => {
-    console.log("select");
     const selectedValue = event.target.value;
-    console.log(selectedValue);
     // setLoading(true);
     if (selectedValue === "select") {
       fetchData();
@@ -53,11 +48,9 @@ function App() {
           "https://hp-api.onrender.com/api/characters"
         );
         const jsonData = await response.json();
-        console.log("jsonData in select filter", jsonData);
         const filteredData = jsonData.filter(
           (item) => item.house === selectedValue
         );
-        console.log("filteredData", filteredData);
         setData(filteredData);
         setLoading(false);
       } catch (error) {
@@ -67,9 +60,7 @@ function App() {
     }
   };
   const handleSearchName = async (event) => {
-    console.log("search");
     const searchText = event.target.value;
-    console.log(searchText);
 
     if (searchText === null) {
       setData(null);
@@ -79,12 +70,10 @@ function App() {
           "https://hp-api.onrender.com/api/characters"
         );
         const jsonData = await response.json();
-        console.log("jsonData in select filter", jsonData);
 
         const filteredDataName = jsonData.filter((item) =>
           item.name.toLowerCase().includes(searchText.toLowerCase())
         );
-        console.log("filteredDataName", filteredDataName);
         if (filteredDataName.length === 0) {
           setData(null);
         } else {
@@ -99,7 +88,6 @@ function App() {
   };
 
   const deleteList = (id) => {
-    console.log(id);
     const updatedData = data.filter((item) => item.id !== id);
     setData(updatedData);
   };
